@@ -6,7 +6,7 @@ const sesiones = [
   {
     id: 1,
     titulo: "Sesion 01",
-    videoUrl: "https://www.youtube.com/watch?v=Fpy8x4WMzPk",
+    videoUrl: "https://www.youtube.com/watch?v=Bwxwi0cvfgI",
     materialUrl: drive_link
   },
   {
