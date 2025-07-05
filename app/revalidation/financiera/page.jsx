@@ -1,6 +1,6 @@
 // pages/cursos/micro.js
 import Link from "next/link";
-const drive_link = "https://drive.google.com/drive/folders/1EWg4d5z99nr8jyuahBAvil_5p_ErD54K?usp=sharing"
+const drive_link = "https://drive.google.com/drive/folders/1ypBLIiHXLzeTDgBdQmttRisXESD4KV7B?usp=sharing"
 
 const sesiones = [
   {
