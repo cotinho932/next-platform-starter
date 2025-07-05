@@ -1,79 +1,65 @@
-import { revalidateTag } from 'next/cache';
-import { Card } from 'components/card';
-import { Markdown } from 'components/markdown';
-import { SubmitButton } from 'components/submit-button';
+import Link from "next/link";
 
-export const metadata = {
-    title: 'On-Demand Revalidation'
-};
+const cursos = [
+  {
+    id: 1,
+    title: "Econometría con software",
+    descripcion: "Aprende econometría aplicada usando Excel, Stata, R y SPSS.",
+    lecciones: "13/29",
+    progreso: 45,
+  },
+  {
+    id: 2,
+    title: "Estadística con R",
+    descripcion: "Fundamentos de estadística descriptiva e inferencial con R.",
+    lecciones: "3/8",
+    progreso: 38,
+  },
+  {
+    id: 3,
+    title: "Matemáticas para econometría",
+    descripcion: "Conceptos matemáticos esenciales para el análisis econométrico.",
+    lecciones: "2/2",
+    progreso: 100,
+  },
+];
 
-const tagName = 'randomWiki';
-const randomWikiUrl = 'https://en.wikipedia.org/api/rest_v1/page/random/summary';
-const maxExtractLength = 200;
-const revalidateTTL = 60;
+export default function CursosPage() {
+  return (
+    <main className="min-h-screen bg-gray-50 p-6">
+      <header className="flex items-center justify-between mb-8">
+        <Link href="/" className="text-blue-600 font-semibold text-lg">
+          ⬅ Home
+        </Link>
+        <h1 className="text-2xl font-bold text-neutral-800">Cursos</h1>
+      </header>
 
-const explainer = `
-This page perfoms a \`fetch\` on the server to get a random article from Wikipedia. 
-The fetched data is then cached with a tag named "${tagName}" and a maximum age of ${revalidateTTL} seconds.
-
-~~~jsx
-const url = 'https://en.wikipedia.org/api/rest_v1/page/random/summary';
-
-async function RandomArticleComponent() {
-    const randomArticle = await fetch(url, {
-        next: { revalidate: ${revalidateTTL}, tags: ['${tagName}'] }
-    });
-    // ...render
+      <div className="grid md:grid-cols-3 gap-6">
+        {cursos.map((curso) => (
+          <div
+            key={curso.id}
+            className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all"
+          >
+            <h2 className="text-xl font-semibold mb-2 text-blue-700">
+              {curso.title}
+            </h2>
+            <p className="text-gray-600 mb-4">{curso.descripcion}</p>
+            <div className="text-sm text-gray-500 mb-2">
+              Lecciones: {curso.lecciones}
+            </div>
+            <div className="w-full bg-gray-200 h-2 rounded-full mb-4">
+              <div
+                className="bg-blue-500 h-2 rounded-full"
+                style={{ width: `${curso.progreso}%` }}
+              ></div>
+            </div>
+            <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+              Continuar Aprendiendo
+            </button>
+          </div>
+        ))}
+      </div>
+    </main>
+  );
 }
-~~~
 
-After the set time has passed, the first request for this page would trigger its rebuild in the background. When the new page is ready, subsequent requests would return the new page - 
-see [\`stale-white-revalidate\`](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/).
-
-Alternatively, if the cache tag is explicitly invalidated by \`revalidateTag('${tagName}')\`, any page using that tag would be rebuilt in the background when requested.
-
-In real-life applications, tags are typically invalidated when data has changed in an external system (e.g., the CMS notifies the site about content changes via a webhook), or after a data mutation made through the site.
-
-For this functionality to work, Next.js uses the [fine-grained caching headers](https://docs.netlify.com/platform/caching/) available on Netlify - but you can use these features on basically any Netlify site!
-`;
-
-export default async function Page() {
-    async function revalidateWiki() {
-        'use server';
-        revalidateTag(tagName);
-    }
-
-    return (
-        <>
-            <h1 className="mb-8">Revalidation Basics</h1>
-            <Markdown content={explainer} className="mb-6" />
-            <form className="mb-8" action={revalidateWiki}>
-                <SubmitButton text="Click to Revalidate" />
-            </form>
-            <RandomWikiArticle />
-        </>
-    );
-}
-
-async function RandomWikiArticle() {
-    const randomWiki = await fetch(randomWikiUrl, {
-        next: { revalidate: revalidateTTL, tags: [tagName] }
-    });
-
-    const content = await randomWiki.json();
-    let extract = content.extract;
-    if (extract.length > maxExtractLength) {
-        extract = extract.slice(0, extract.slice(0, maxExtractLength).lastIndexOf(' ')) + ' [...]';
-    }
-
-    return (
-        <Card className="max-w-2xl">
-            <h3 className="text-2xl text-neutral-900">{content.title}</h3>
-            <div className="text-lg font-bold">{content.description}</div>
-            <p className="italic">{extract}</p>
-            <a target="_blank" rel="noopener noreferrer" href={content.content_urls.desktop.page}>
-                From Wikipedia
-            </a>
-        </Card>
-    );
-}
