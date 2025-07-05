@@ -15,6 +15,18 @@ const sesiones = [
     materialUrl: ""
   },
 ];
+function convertirEnlaceEmbed(url) {
+  // Verifica si ya está en formato embed
+  if (url.includes("youtube.com/embed")) return url;
+
+  const match = url.match(/v=([^&]+)/); // extrae el ID del video
+  if (match && match[1]) {
+    return `https://www.youtube.com/embed/${match[1]}`;
+  }
+
+  // Si no encuentra el ID, devuelve el original
+  return url;
+}
 
 export default function FundamentosCursoPage() {
   return (
@@ -43,7 +55,7 @@ export default function FundamentosCursoPage() {
             <div className="aspect-w-16 aspect-h-9 mb-4">
               <iframe
                 className="w-full h-64"
-                src={s.videoUrl}
+                src={convertirEnlaceEmbed(s.videoUrl)}
                 title={s.titulo}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -64,3 +76,4 @@ export default function FundamentosCursoPage() {
     </main>
   );
 }
+
