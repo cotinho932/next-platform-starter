@@ -1,17 +1,16 @@
-// pages/cursos/fundamentos.js
 import Link from "next/link";
 
 const sesiones = [
   {
     id: 1,
     titulo: "Sesion 01 - Introducción",
-    videoUrl: "https://www.youtube.com/watch?v=zVgvvQaIhro",
+    videoUrl: "https://www.youtube.com/embed/zVgvvQaIhro",
     materialUrl: "https://drive.google.com/drive/folders/18EgT8AlcDr-aXDBMMAPK-QYRWcIwf-hn?usp=sharing"
   },
   {
     id: 2,
     titulo: "Sesion 02 - Variables y modelos",
-    videoUrl: "https://www.youtube.com/watch?v=zMtyRJ-dXIs",
+    videoUrl: "https://www.youtube.com/embed/zMtyRJ-dXIs",
     materialUrl: "https://drive.google.com/drive/folders/18EgT8AlcDr-aXDBMMAPK-QYRWcIwf-hn?usp=sharing"
   },
 ];
@@ -30,7 +29,7 @@ export default function FundamentosCursoPage() {
         </ul>
       </aside>
       <section className="flex-1">
-        <Link href="/cursos" className="text-blue-600 mb-4 block">
+        <Link href="/revalidation" className="text-blue-600 mb-4 block">
           ⬅ Volver a Cursos
         </Link>
         {sesiones.map((s) => (
@@ -40,9 +39,9 @@ export default function FundamentosCursoPage() {
             className="mb-12 bg-white p-6 rounded-xl shadow"
           >
             <h3 className="text-xl font-bold mb-4">{s.titulo}</h3>
-            <div className="aspect-w-16 aspect-h-9 mb-4">
+            <div className="relative pb-[56.25%] h-0 mb-4">
               <iframe
-                className="w-full h-64"
+                className="absolute top-0 left-0 w-full h-full"
                 src={s.videoUrl}
                 title={s.titulo}
                 frameBorder="0"
@@ -64,3 +63,4 @@ export default function FundamentosCursoPage() {
     </main>
   );
 }
+
