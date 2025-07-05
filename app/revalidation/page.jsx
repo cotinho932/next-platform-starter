@@ -3,20 +3,62 @@ import Link from "next/link";
 const cursos = [
   {
     id: 1,
-    title: "Econometría con software",
+    title: "Fundamentos de la Econometría",
     descripcion: "Aprende econometría aplicada usando Excel, Stata, R y SPSS.",
     lecciones: "29",
     progreso: 0,
   },
   {
     id: 2,
+    title: "Microeconometría aplicada",
+    descripcion: "Aprende econometría aplicada usando Excel, Stata, R y SPSS.",
+    lecciones: "29",
+    progreso: 0,
+  },
+  {
+    id: 3,
+    title: "Macroeconometría aplicada",
+    descripcion: "Aprende econometría aplicada usando Excel, Stata, R y SPSS.",
+    lecciones: "29",
+    progreso: 0,
+  },
+  {
+    id: 4,
+    title: "Evaluación de impacto",
+    descripcion: "Aprende econometría aplicada usando Excel, Stata, R y SPSS.",
+    lecciones: "29",
+    progreso: 0,
+  },
+     {
+    id: 5,
+    title: "Econometría Financiera",
+    descripcion: "Aprende econometría aplicada usando Excel, Stata, R y SPSS.",
+    lecciones: "29",
+    progreso: 0,
+  },
+  {
+    id: 6,
+    title: "Econometría Bayesiana",
+    descripcion: "Aprende econometría aplicada usando Excel, Stata, R y SPSS.",
+    lecciones: "29",
+    progreso: 0,
+  },
+  {
+    id: 7,
+    title: "Econometría espacial",
+    descripcion: "Aprende econometría aplicada usando Excel, Stata, R y SPSS.",
+    lecciones: "29",
+    progreso: 0,
+  },
+  {
+    id: 8,
     title: "Estadística con R",
     descripcion: "Fundamentos de estadística descriptiva e inferencial con R.",
     lecciones: "8",
     progreso: 0,
   },
   {
-    id: 3,
+    id: 9,
     title: "Matemáticas para econometría",
     descripcion: "Conceptos matemáticos esenciales para el análisis econométrico.",
     lecciones: "2",
@@ -26,7 +68,7 @@ const cursos = [
 
 export default function CursosPage() {
   return (
-    <main className="min-h-screen bg-gray-50 p-6">
+    <main className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-800 to-blue-700 p-6 text-white">
       <header className="flex items-center justify-between mb-8">
         <Link href="/" className="text-blue-600 font-semibold text-lg">
           ⬅ Home
