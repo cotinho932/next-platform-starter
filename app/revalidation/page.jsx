@@ -95,8 +95,12 @@ export default function CursosPage() {
                 style={{ width: `${curso.progreso}%` }}
               ></div>
             </div>
-            <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
-              Continuar Aprendiendo
+            <Link href={`/revalidation/fundamentos`}>
+              <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+            Continuar Aprendiendo
+              </button>
+            </Link>
+
             </button>
           </div>
         ))}
