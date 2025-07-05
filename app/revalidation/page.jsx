@@ -6,21 +6,21 @@ const cursos = [
     title: "Econometría con software",
     descripcion: "Aprende econometría aplicada usando Excel, Stata, R y SPSS.",
     lecciones: "13/29",
-    progreso: 45,
+    progreso: 0,
   },
   {
     id: 2,
     title: "Estadística con R",
     descripcion: "Fundamentos de estadística descriptiva e inferencial con R.",
     lecciones: "3/8",
-    progreso: 38,
+    progreso: 0,
   },
   {
     id: 3,
     title: "Matemáticas para econometría",
     descripcion: "Conceptos matemáticos esenciales para el análisis econométrico.",
     lecciones: "2/2",
-    progreso: 100,
+    progreso: 0,
   },
 ];
 
