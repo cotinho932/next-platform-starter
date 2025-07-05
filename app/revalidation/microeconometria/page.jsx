@@ -61,7 +61,7 @@ export default function FundamentosCursoPage() {
         </ul>
       </aside>
       <section className="flex-1">
-        <Link href="/cursos" className="text-blue-600 mb-4 block">
+        <Link href="/revalidation" className="text-blue-600 mb-4 block">
           ⬅ Volver a Cursos
         </Link>
         {sesiones.map((s) => (
