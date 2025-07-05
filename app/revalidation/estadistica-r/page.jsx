@@ -1,0 +1,110 @@
+// pages/cursos/micro.js
+import Link from "next/link";
+const drive_link = "https://drive.google.com/drive/folders/1tr6oveeMQLtw5brhwP1yQtgHESqWWfOa?usp=sharing"
+
+const sesiones = [
+  {
+    id: 1,
+    titulo: "Sesion 01",
+    videoUrl: "https://www.youtube.com/watch?v=t7MiHv3q3Nc",
+    materialUrl: drive_link
+  },
+  {
+    id: 2,
+    titulo: "Sesion 02",
+    videoUrl: "https://www.youtube.com/watch?v=_x8l9b3utIs",
+    materialUrl: drive_link
+  },
+  {
+    id: 3,
+    titulo: "Sesion 03",
+    videoUrl: "https://www.youtube.com/watch?v=sjWG_cWooqo",
+    materialUrl: drive_link
+  },
+  {
+    id: 4,
+    titulo: "Sesion 04",
+    videoUrl: "https://www.youtube.com/watch?v=vwzCEPy8TSI",
+    materialUrl: drive_link
+  },
+  {
+    id: 5,
+    titulo: "Sesion 05",
+    videoUrl: "https://www.youtube.com/watch?v=6_M79WBwZHQ",
+    materialUrl: drive_link
+  },
+  {
+    id: 6,
+    titulo: "Sesion 06",
+    videoUrl: "https://www.youtube.com/watch?v=1owF06ItEXw",
+    materialUrl: drive_link
+  },
+  {
+    id: 7,
+    titulo: "Sesion 07",
+    videoUrl: "https://www.youtube.com/watch?v=5w_Vq07msa0",
+    materialUrl: drive_link
+  },
+];
+
+function convertirEnlaceEmbed(url) {
+  // Verifica si ya está en formato embed
+  if (url.includes("youtube.com/embed")) return url;
+
+  const match = url.match(/v=([^&]+)/); // extrae el ID del video
+  if (match && match[1]) {
+    return `https://www.youtube.com/embed/${match[1]}`;
+  }
+
+  // Si no encuentra el ID, devuelve el original
+  return url;
+}
+
+export default function FundamentosCursoPage() {
+  return (
+    <main className="min-h-screen bg-gray-50 p-4 md:flex">
+      <aside className="w-full md:w-1/4 p-4 bg-blue-100 rounded-lg mb-4 md:mb-0 md:mr-6">
+        <h2 className="text-lg font-semibold mb-4">Contenido del curso</h2>
+        <ul className="space-y-2">
+          {sesiones.map((s) => (
+            <li key={s.id} className="text-blue-800 hover:underline">
+              <a href={`#sesion-${s.id}`}>{s.titulo}</a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+      <section className="flex-1">
+        <Link href="/revalidation" className="text-blue-600 mb-4 block">
+          ⬅ Volver a Cursos
+        </Link>
+        {sesiones.map((s) => (
+          <div
+            key={s.id}
+            id={`sesion-${s.id}`}
+            className="mb-12 bg-white p-6 rounded-xl shadow"
+          >
+            <h3 className="text-xl font-bold mb-4">{s.titulo}</h3>
+            <div className="aspect-w-16 aspect-h-9 mb-4">
+              <iframe
+                className="w-full h-64"
+                src={convertirEnlaceEmbed(s.videoUrl)}
+                title={s.titulo}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <a
+              href={s.materialUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-white bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
+            >
+              📄 Material
+            </a>
+          </div>
+        ))}
+      </section>
+    </main>
+  );
+}
